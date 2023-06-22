@@ -1,0 +1,143 @@
+/*From this point to the point where there is ABDEV the code belongs to the header*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/*this changes the color of the nav bar, the position of the nav bar is set to sticky in this code, it means the nav bar movess along with the scrolling it stays visible no mater how long you scroll*/
+header {
+    background-color: #3AA6B9;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+/*this contols the padding of the nav bar the size of the nav bar increases with in crease in the size of the padding */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+/*align item is used to align items inside the box, it can be stretch, center, end and start*/
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/*this changes the appearance of the books and swans home button*/
+.logo-text {
+    color: #fff;
+    font-size: 30px;
+    text-decoration: none;
+    margin-left: 10px;
+    /* Adjust the margin as needed */
+}
+
+
+.navigation {
+    list-style-type: none;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    /* Added */
+}
+
+.spacing
+
+/*this is used to control the space between the books and swans logo and the remaining items of the nav bar*/
+    {
+    margin-left: 40px;
+}
+
+.navigation li {
+    /*this is used to control the spacing between the items of the nav bar*/
+    margin-left: 40px;
+}
+
+.navigation li a {
+    /*this is used to control the color, fontsize of the elements of the nav bar*/
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.navigation li a:hover {
+    /*this is used to change the hover effect color*/
+    color: #FFA9A9;
+    border-bottom: solid 5px #FFA9A9;
+    ;
+    border-radius: 10px;
+    transition: 0.25s ease-in-out;
+
+}
+
+.hovertext {
+    position: relative;
+}
+
+.hovertext:before {
+    content: attr(data-hover);
+    visibility: hidden;
+    opacity: 0;
+    width: 100px;
+    background-color: #FFA9A9;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px 5px;
+    transition: opacity 1s ease-in-out;
+    position: absolute;
+    margin-top: 5px;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -50px;
+}
+
+.hovertext:hover:before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/*ABDEV*/
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-text {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    color: #fff;
+}
+
+.banner-text h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.banner-text p {
+    font-size: 18px;
+}
