@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="fav icon.png">
+    <title>FreeRTOS|Documentation</title>
+    <meta name="description"
+        content="Discover the world of ESP32 microcontroller optimization and efficiency in this comprehensive documentation. Learn how to leverage its features, control servo motors, and implement code ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/freertos.css">
+    <script src="https://kit.fontawesome.com/20c23b3d90.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <div class="menu-toggle"></div>
+            <ul class="navigation">
+
+                <li><a href="index.html" class="logo-text">Home</a></li>
+                <li><a href="esp32.html">ESP 32</a></li>
+                <li><a href="freertos.html">FreeRTOS</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="resources.html">Resources</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="documentation">
+        <h1>FreeRTOS(Real Time Operating System)</h1>
+        <h2>FreeRTOS Overview</h2>
+        <p>FreeRTOS is an open-source real-time operating system (RTOS) that provides a multitasking kernel for embedded
+            systems. It is designed to be highly efficient, portable, and scalable, making it a popular choice among
+            developers working on real-time and resource-constrained applications.
+        </p>
+        <h3>Key Features and Capabilities:</h3>
+        <ul>
+            <li>
+                <h3>KernelArchitecture:</h3> FreeRTOS follows a small footprint kernel architecture. It consists of a
+                scheduler
+                that manages tasks
+                and provides essential services for task scheduling, synchronization, and inter-task communication. The
+                kernel is implemented in C and assembly language, with a focus on simplicity, modularity, and
+                portability.
+            </li>
+            <li>
+                <h3>Task Management:</h3> FreeRTOS allows developers to create multiple tasks, each representing a
+                separate
+                thread of execution.
+                Tasks have different priorities, and the scheduler ensures that tasks with higher priority are executed
+                first. Tasks can be preemptive or cooperative, and context switching between tasks is fast and
+                efficient.
+            </li>
+            <li>
+                <h3>Scheduling:</h3>
+                FreeRTOS provides different scheduling algorithms, including preemptive and time-sliced scheduling. The
+                scheduler determines which task should run based on their priorities and ensures that tasks are executed
+                in a deterministic and timely manner. The scheduling policy can be customized according to the specific
+                requirements of the application.
+            </li>
+            <li>
+                <h3>Memory Management:</h3>
+                FreeRTOS provides memory management capabilities for dynamic memory allocation. It offers memory
+                allocation schemes such as heap_1, heap_2, heap_3 and heap_4, allowing developers to choose the most
+                suitable
+                memory management strategy for their applications.
+            </li>
+            <li>
+                <h3>Tick Interrupt:</h3>
+                FreeRTOS uses a tick interrupt to maintain its internal timekeeping and perform periodic tasks. The tick
+                interrupt typically has a fixed time interval, which is configurable in the FreeRTOS configuration file.
+                The tick interrupt is responsible for task switching and managing other time-related activities.
+            </li>
+            <li>
+                <h3>Ecosystem and Tools:</h3>
+                FreeRTOS has a thriving community and a rich ecosystem of tools, middleware, and libraries. The FreeRTOS
+                website offers extensive documentation, including reference manuals, API documentation, and application
+                examples. Additionally, there are third-party tools and integrations available, such as integrated
+                development environments (IDEs), debuggers, and trace tools, which enhance the development experience
+                with FreeRTOS. We can further go through <a href="https://freertos.org/index.html">freeRTOS official
+                    website</a> to know more about it.
+            </li>
+        </ul>
+        <p>
+            FreeRTOS is widely used in various industries, including automotive, aerospace, consumer electronics,
+            industrial automation, medical devices and IoT applications. Its versatility, efficiency, and open-source
+            nature make it a
+            powerful choice for developing real-time embedded systems.
+        </p>
+        <h2>FreeRTOS Task Management</h2>
+        <p>In FreeRTOS, tasks are the basic units of execution that perform specific functions within an embedded
+            system. They are responsible for carrying out various operations concurrently, allowing for efficient
+            multitasking. Here's an overview of how to create and manage tasks in FreeRTOS, along with information about
+            task priorities and synchronization:</p>
+        <ul>
+            <li>
+                <h3>Task Creation:</h3>
+                <ul>
+                    <li>Tasks are created using the xTaskCreate() function, which takes the task function, task name,
+                        stack size, and priority as parameters.</li>
+                    <li>The task function is a standard C function that implements the desired functionality of the
+                        task.</li>
+                    <li>The stack size determines the amount of memory allocated to the task for storing its local
+                        variables and function call stack.</li>
+                    <li>The priority defines the task's importance relative to other tasks and determines the order in
+                        which tasks are scheduled for execution.</li>
+                </ul>
+            </li>
+            <li>
+                <h3>Task Priorities and Scheduling:</h3>
+                <ul>
+                    <li>FreeRTOS employs a preemptive priority-based scheduling algorithm, where tasks with higher
+                        priorities take precedence over lower-priority tasks.</li>
+                    <li>The scheduler ensures that the highest-priority task that is ready to run gets the CPU time.
+                    </li>
+                    <li>Tasks with equal priorities are scheduled in a round-robin manner to provide fairness.</li>
+                    <li>Priority levels are represented as numeric values, where 0 is the lowest priority, and
+                        configMAX_PRIORITIES-1 is the highest.</li>
+                    <li>The priority of a task can be changed dynamically during runtime using the vTaskPrioritySet()
+                        API.</li>
+                    <div class="code-box">
+                        <pre><code>
+                            //Task prioritization example
+
+                                // task function
+
+                                void vTask1(void *pvParameters) {
+
+                                  // task functionality
+
+                                }
+                                //task function
+
+                                void vTask2(void *pvParameters) {
+                                  
+                                    // task functionality
+
+                                }
+                                
+                                void setup() {
+                                  
+                                    // creating Task 1
+
+                                  xTaskCreate(vTask1, "Task1", 1000, NULL, 2, NULL);
+                                
+                                  // creating Task 2
+
+                                  xTaskCreate(vTask2, "Task2", 1000, NULL, 1, NULL);
+                                
+                                  // starting the FreeRTOS scheduler
+
+                                  vTaskStartScheduler();
+                               
+                                }
+                                
+                                void loop() {
+                                  
+                                }
+                                
+                                /*In this example, two tasks, vTask1 and vTask2, are created using xTaskCreate(). 
+                                Task 1 has a higher priority than Task 2. Once the scheduler starts, the tasks will 
+                                execute concurrently, with Task 1 taking precedence due to its higher priority. */
+                                
+                            </code></pre>
+                    </div>
+
+                </ul>
+            </li>
+            <li>
+                <h3>Task Deletion:</h3>
+                <ul>
+                    <li>To delete a task, the vTaskDelete() API is used. This function terminates the calling task and
+                        frees up the associated resources.</li>
+                    <li>It's important to ensure that all necessary cleanup and resource release operations are
+                        performed before deleting a task. For example: If the task dynamically allocated memory during
+                        its execution using functions like pvPortMalloc() or malloc(), it is crucial to free that memory
+                        before deleting the task. Failure to do so can lead to memory leaks and potential system
+                        instability. Use the corresponding deallocation functions like vPortFree() or free() to release
+                        the allocated memory.</li>
+                </ul>
+            </li>
+        </ul>
+        <h2 style="margin-top: 30px;">Memory Management in FreeRTOS:</h2>
+        <p>Memory management is a critical aspect of embedded systems development, and FreeRTOS provides several options
+            for efficient memory usage. Here's a discussion on the memory management options in FreeRTOS and its
+            significance in embedded systems:</p>
+        <ul>
+            <li>
+                <h3>Dynamic Memory Allocation:</h3>
+                <ul>
+                    <li>FreeRTOS allows dynamic memory allocation using standard C library functions such as 'malloc()'
+                        and 'free()'.</li>
+                    <li>Dynamic memory allocation enables flexibility in allocating and deallocating memory at runtime.
+                    </li>
+                    <li>However, it comes with overhead, such as memory fragmentation and potential memory leaks if not
+                        managed carefully.</li>
+                </ul>
+            </li>
+            <li>
+                <h3>Memory Pools:</h3>
+                <ul>
+                    <li>FreeRTOS offers a memory management feature called memory pools, also known as fixed-size memory
+                        block allocation.
+                    </li>
+                    <li>Memory pools provide a pre-allocated block of memory divided into fixed-size blocks, eliminating
+                        fragmentation issues.
+                    </li>
+                    <li>Memory pools are efficient for tasks that require a fixed-size memory allocation pattern.
+                    </li>
+                    <li> FreeRTOS provides APIs such as xQueueCreateStatic() and xQueueCreateStaticRestricted() to
+                        create and manage memory pools.</li>
+                </ul>
+            </li>
+            <li>
+                <h3>Efficient Memory Usage:</h3>
+                <ul>
+                    <li>Embedded systems often have limited memory resources, and efficient memory usage is crucial for
+                        optimal performance.
+                    </li>
+                    <li>FreeRTOS helps in managing memory efficiently by providing features like stack depth calculation
+                        and stack overflow detection.
+                    </li>
+                    <li>It also offers stack overflow checking options, such as using stack canaries, to detect and
+                        handle stack overflows.</li>
+                </ul>
+            </li>
+            <li>
+                <h3>Memory Management Best Practices:</h3>
+                <ul>
+                    <li> To ensure efficient memory usage in FreeRTOS applications, it is essential to follow best
+                        practices:
+                    </li>
+                    <li>Avoid excessive dynamic memory allocation and deallocation.
+                    </li>
+                    <li>Determine and allocate appropriate stack sizes for tasks based on their requirements.
+                    </li>
+                    <li> Use memory pools for fixed-size memory allocations whenever possible.
+                    </li>
+                    <li> Regularly review and optimize memory usage to minimize wastage and fragmentation.
+                    </li>
+                    <li> Enable stack overflow checking and handle stack overflows gracefully.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <div class="container">
+        <h1>FreeRTOS vs Linux</h1>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>FreeRTOS</th>
+                <th>Linux</th>
+            </tr>
+            <tr>
+                <td>Real-time capabilities</td>
+                <td>Yes</td>
+                <td>Yes (with real-time patches)</td>
+            </tr>
+            <tr>
+                <td>Kernel Size</td>
+                <td>Small</td>
+                <td>Large</td>
+            </tr>
+            <tr>
+                <td>Task Scheduling</td>
+                <td>Preemptive</td>
+                <td>Preemptive</td>
+            </tr>
+            <tr>
+                <td>Memory Management</td>
+                <td>Dynamic memory allocation, memory pools</td>
+                <td>Virtual memory, memory management units (MMUs)</td>
+            </tr>
+            <tr>
+                <td>Interrupt Handling</td>
+                <td>Supports interrupt service routines (ISRs) and deferred interrupt handling</td>
+                <td>Supports interrupt service routines (ISRs)</td>
+            </tr>
+            <tr>
+                <td>Supported Architectures</td>
+                <td>Wide range of microcontrollers and processors</td>
+                <td>Wide range of processors, including x86, ARM, MIPS, etc.</td>
+            </tr>
+        </table>
+    </div>
+    <div class="advantages">
+        <h2>Advantages of FreeRTOS over Linux</h2>
+
+        <ul>
+            <li>
+                <h3>Real-Time Determinism</h3>
+                <p>FreeRTOS provides deterministic and predictable behavior for real-time systems, suitable for
+                    time-sensitive applications.</p>
+            </li>
+            <li>
+                <h3>Small Footprint</h3>
+                <p>FreeRTOS has a small kernel size, making it lightweight and efficient for resource-constrained
+                    environments.</p>
+            </li>
+            <li>
+                <h3>Resource Efficiency</h3>
+                <p>FreeRTOS optimizes resource usage, allowing effective task management and memory allocation.</p>
+            </li>
+            <li>
+                <h3>Simplified Development</h3>
+                <p>FreeRTOS offers a simple and easy-to-use API, reducing the learning curve and speeding up the
+                    development process.</p>
+            </li>
+            <li>
+                <h3>Deterministic Timing</h3>
+                <p>FreeRTOS supports precise timing requirements, enabling the development of time-critical
+                    applications.</p>
+            </li>
+            <li>
+                <h3>Real-Time Debugging</h3>
+                <p>FreeRTOS provides built-in debugging features for monitoring and analyzing the system's behavior in
+                    real-time.</p>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="fav icon.png">
+    <title>Exploring ESP32: A Documentation</title>
+    <meta name="description"
+        content="Discover the world of ESP32 microcontroller optimization and efficiency in this comprehensive documentation. Learn how to leverage its features, control servo motors, and implement code ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/esp32.css">
+    <script src="https://kit.fontawesome.com/20c23b3d90.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <div class="menu-toggle"></div>
+            <ul class="navigation">
+
+                <li><a href="index.html" class="logo-text">Home</a></li>
+                <li><a href="esp32.html">ESP 32</a></li>
+                <li><a href="freertos.html">FreeRTOS</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="resources.html">Resources</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="documentation">
+        <h1>ESP32</h1>
+        <h2>ESP32 Overview</h2>
+        <p>
+            The ESP32 is a powerful microcontroller widely used in Internet of Things (IoT) projects due to its
+            versatility and rich feature set. It is developed by <a href="https://www.espressif.com/en">Espressif
+                Systems</a> and offers an array of capabilities
+            that make it an ideal choice for a wide range of applications.
+        </p>
+        <h3>Key Features and Capabilities:</h3>
+        <ul>
+            <li>
+                <h3>Wi-Fi, Bluetooth Connectivity and Bluetooth Low Energy(BLE): </h3>The ESP32 provides built-in Wi-Fi
+                and
+                Bluetooth connectivity, allowing
+                seamless integration into wireless networks and communication with other devices. The BLE is a wireless
+                communication technology that consumes less power compared to traditional Bluetooth. It is commonly used
+                in various applications, such as IoT devices, fitness trackers, and smartwatches, enabling efficient and
+                energy-saving data transfer over short distances.
+            </li>
+            <li>
+                <h3>Powerful CPU: </h3>It is based on the Xtensa dual-core 32-bit LX6 microprocessor, operating at up to
+                240 MHz,
+                providing sufficient processing power for complex tasks.Due to the presence of the dual core we can
+                write true parallel operations i.e we can perform two different tasks at the same time without involving
+                time slicing or preemptive scheduling, in this case execution time of one task doesn't affect another
+                task.
+            </li>
+            <li>
+                <h3>GPIO Pins: </h3>With a large number of General Purpose Input/Output (GPIO) pins, the ESP32
+                facilitates the
+                connection and control of various external devices, sensors, and actuators.
+            </li>
+            <li>
+                <h3>Communication Protocols:</h3> It supports various communication protocols such as I2C, I2S, SPI,
+                UART, and
+                more,
+                allowing seamless integration with other devices and peripherals.
+            </li>
+            <li>
+                <h3>Low Power Consumption: </h3>It is designed to operate efficiently with low power consumption, making
+                it
+                suitable for battery-powered and energy-efficient applications. ESP32 will go into deep sleep mode for
+                energy energy-saving
+            </li>
+            <li>
+                <h3>RTOS Support</h3>Real-time operating system (RTOS) support through which we can achive parallel
+                tasking, low memory foot
+                print and many other advantages
+            </li>
+        </ul>
+        <p>
+            In this documentation, you will learn how to work with the ESP32, optimize its performance, and make your
+            projects more efficient. You will also explore topics such as GPIO configuration, using the ESP32 with
+            FreeRTOS, controlling servo motors, and more.
+        </p>
+        <h2>ESP32 GPIO Configuration</h2>
+        <p>In this section, we will delve into the GPIO functionality of the ESP32, covering digital input/output,
+            interrupt handling, and GPIO pin configuration.</p>
+        <ul>
+            <li>
+                <h3>GPIO Basics:</h3>
+                GPIO pins can be configured as either input or output, allowing them to interact with digital signals
+                from external devices or control the state of connected components. Each GPIO pin on the ESP32 is
+                identified by a specific number or label, such as GPIO0, GPIO2, etc. These pins can typically handle
+                both digital signals (binary values of HIGH or LOW) and analog signals (continuous voltage values).
+            </li>
+            <li>
+                <h3>GPIO Pin Configuration:</h3>
+                To configure a GPIO pin on the ESP32, you can utilize the ESP32 Arduino core library or the ESP-IDF
+                (ESP32 IoT Development Framework) directly. The configuration involves specifying the pin number, mode
+                (input/output), and additional settings such as pull-up/pull-down resistors, interrupt type, etc.
+            </li>
+            <li>
+                <h3>Digital Input:</h3>
+                When a GPIO pin is configured as a digital input, it can be used to read the state of an external device
+                or sensor. You can use functions like pinMode() to set the pin as INPUT and then use digitalRead() to
+                obtain the current state of the pin (HIGH or LOW). This functionality is useful for reading buttons,
+                switches, or other digital signals.
+            </li>
+            <li>
+                <h3>Digital Output:</h3>
+                Configuring a GPIO pin as a digital output allows you to control the state of external devices or
+                actuators. Using pinMode() to set the pin as OUTPUT and digitalWrite() to set the pin state to HIGH or
+                LOW, you can control LEDs, relays, motors, and other digital components.
+            </li>
+            <li>
+                <h3>Interrupt Handling:</h3>
+                GPIO pins on the ESP32 also support interrupt handling, which allows you to respond to specific events
+                or changes in the pin's state. By configuring the pin as an interrupt input using pinMode() and
+                attaching an interrupt handler function with attachInterrupt(), you can execute custom code whenever the
+                pin's state changes. Interrupts are commonly used to handle button presses, sensor events, or
+                time-sensitive operations.
+            </li>
+        </ul>
+        <center> <img src="Esp32 pin diagram.webp" alt=""> </center>
+        <center> <a href="https://randomnerdtutorials.com/esp32-pinout-reference-gpios/">
+                this image is taken from
+                Random
+                Nerd Tutorials</a></center>
+        <h2 style="margin-top: 30px;">Comparison between ESP32 and Arduino</h2>
+        <table>
+            <tr>
+                <th>Features</th>
+                <th>ESP32</th>
+                <th>Arduino Uno</th>
+            </tr>
+            <tr>
+                <td>Microcontroller</td>
+                <td>ESP32</td>
+                <td>ATmega328P</td>
+            </tr>
+            <tr>
+                <td>Operating Voltage</td>
+                <td>3.3V</td>
+                <td>5V</td>
+            </tr>
+            <tr>
+                <td>Processor Speed</td>
+                <td>Up to 240 MHz</td>
+                <td>16 MHz</td>
+            </tr>
+            <tr>
+                <td>Flash Memory</td>
+                <td>Up to 4MB</td>
+                <td>32KB</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>Up to 520KB</td>
+                <td>2KB</td>
+            </tr>
+            <tr>
+                <td>Digital I/O Pins</td>
+                <td>Up to 36</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>PWM Output Channels</td>
+                <td>Up to 16</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>ADC Channels</td>
+                <td>Up to 18</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>DAC Channels</td>
+                <td>Up to 2</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Deep Sleep</td>
+                <td>Present</td>
+                <td>Absent</td>
+            </tr>
+            <tr>
+                <td>Bluetooth</td>
+                <td>Present</td>
+                <td>Absent</td>
+            </tr>
+            <tr>
+                <td>Wi-Fi</td>
+                <td>Present</td>
+                <td>Absent</td>
+            </tr>
+            <tr>
+                <td>Hall Sensor</td>
+                <td>Present</td>
+                <td>Absent</td>
+            </tr>
+            <tr>
+                <td>Temp sensor</td>
+                <td>Present</td>
+                <td>Absent</td>
+            </tr>
+            <tr>
+                <td>Touch Sensor</td>
+                <td>Present</td>
+                <td>Absent</td>
+            </tr>
+        </table>
+        <p>There are also 10 capacitive touch sensors,4 SPI bus channels, 2 I2C bus connections, 2 I2S connections and 3
+            UARTs for serial communication </p>
+    </section>
+</body>
+
+</html>
